@@ -1,0 +1,80 @@
+class intSet(object):
+    """An intSet is a set of integers
+    The value is represented by a list of ints, self.vals.
+    Each int in the set occurs in self.vals exactly once."""
+
+    def __init__(self):
+        """Create an empty set of integers"""
+        self.vals = []
+
+    def insert(self, e):
+        """Assumes e is an integer and inserts e into self"""
+        if not e in self.vals:
+            self.vals.append(e)
+
+    def member(self, e):
+        """Assumes e is an integer
+        Returns True if e is in self, and False otherwise"""
+        return e in self.vals
+
+    def remove(self, e):
+        """Assumes e is an integer and removes e from self
+        Raises ValueError if e is not in self"""
+        try:
+            self.vals.remove(e)
+        except:
+            raise ValueError(str(e) + ' not found')
+
+    def __str__(self):
+        """Returns a string representation of self"""
+        self.vals.sort()
+        return '{' + ','.join([str(e) for e in self.vals]) + '}'
+    
+    def intersect(self, other):
+        s = intSet()
+        for e in self.vals:
+            for i in other.vals:
+                if e == i:
+                    s.insert(e)
+        return s
+        
+    def __len__(self):
+        return len(self.vals)
+
+setA = intSet()
+setB = intSet()
+
+setA.insert(-16)
+setA.insert(-7)
+setA.insert(-3)
+setA.insert(-4)
+setA.insert(1)
+setA.insert(3)
+setA.insert(6)
+setA.insert(12)
+setA.insert(15)
+
+setB.insert(-9)
+setB.insert(-5)
+setB.insert(4)
+setB.insert(5)
+setB.insert(11)
+setB.insert(13)
+setB.insert(14)
+setB.insert(16)
+
+print setA.intersect(setB)
+
+# s = intSet()
+# print s
+# s.insert(3)
+# s.insert(4)
+# s.insert(3)
+# print s
+# s.member(3)
+# s.member(5)
+# s.insert(6)
+# print s
+# s.remove(3)
+# print s
+# s.remove(3)
